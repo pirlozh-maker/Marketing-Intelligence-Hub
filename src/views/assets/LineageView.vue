@@ -1,0 +1,2 @@
+<template><el-card><template #header>资产血缘关系</template><div class="lineage"><template v-for="(n,i) in nodes" :key="n"><el-card class="lineage-card">{{n}}<p>{{desc[i]}}</p></el-card><span v-if="i<nodes.length-1" class="arrow">→</span></template></div></el-card></template>
+<script setup lang="ts">const nodes=['原始政策文件','Markdown 编译文件','知识切片','结构化规则','技能包','智脑回答']; const desc=['PDF/Word/Excel','结构化摘要与锚点','条款级向量化','条件与结论','导办能力封装','有依据输出'];</script>
