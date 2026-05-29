@@ -1,0 +1,2 @@
+<template><el-card><template #header>Schema 配置</template><div class="two-col"><JsonEditor v-model="input"/><JsonEditor v-model="output"/></div><el-button type="primary" class="mt">保存 Schema</el-button></el-card></template>
+<script setup lang="ts">import { ref } from 'vue'; import JsonEditor from '@/components/JsonEditor.vue'; const input=ref('{"customerId":"string","businessType":"string"}'); const output=ref('{"materials":[],"evidence":"string"}');</script>
