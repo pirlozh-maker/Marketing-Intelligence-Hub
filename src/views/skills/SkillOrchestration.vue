@@ -1,0 +1,2 @@
+<template><el-card><template #header>技能编排</template><FlowSteps :steps="['识别用户主体','判断业务类型','查询政策依据','执行规则判断','生成材料清单','输出结论和办理路径']"/><el-divider/><el-steps direction="vertical" :active="6"><el-step v-for="s in steps" :key="s" :title="s" description="可配置入参、出参、异常处理和人工确认策略"/></el-steps></el-card></template>
+<script setup lang="ts">import FlowSteps from '@/components/FlowSteps.vue'; const steps=['识别用户主体','判断业务类型','查询政策依据','执行规则判断','生成材料清单','输出结论和办理路径'];</script>

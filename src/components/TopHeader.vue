@@ -1,0 +1,2 @@
+<template><div class="top-header"><div class="left"><el-button text @click="app.toggle"><el-icon><Fold /></el-icon></el-button><div><b>数据资产与能力治理中心</b><p>面向营业厅智脑 / 营销智脑的能力治理平台</p></div></div><div class="right"><el-input placeholder="搜索资产、规则、技能" :prefix-icon="Search" clearable /><el-badge :value="8"><el-button :icon="Bell" circle /></el-badge><el-avatar>管</el-avatar><span>治理管理员</span></div></div></template>
+<script setup lang="ts">import { Bell, Fold, Search } from '@element-plus/icons-vue'; import { useAppStore } from '@/stores/app'; const app=useAppStore();</script>
