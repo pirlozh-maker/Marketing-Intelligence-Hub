@@ -1,7 +1,36 @@
-import { assets, chunks, compileTasks, conflicts, conversations, files, healthScores, markdownDocs, metadata, missingKnowledge, policies, reviewTasks, rules, skills, terminals, tools, traces, versions } from '@/mock/data';
+import { domainService } from '@/services/domainService';
 import { mockResolve } from './http';
+
 export const api = {
- dashboard:()=>mockResolve({assets, rules, skills, tools, reviewTasks, conversations}), assets:()=>mockResolve(assets), files:()=>mockResolve(files), metadata:()=>mockResolve(metadata), versions:()=>mockResolve(versions), compileTasks:()=>mockResolve(compileTasks), markdownDocs:()=>mockResolve(markdownDocs), chunks:()=>mockResolve(chunks), policies:()=>mockResolve(policies), conflicts:()=>mockResolve(conflicts), missing:()=>mockResolve(missingKnowledge), rules:()=>mockResolve(rules), skills:()=>mockResolve(skills), tools:()=>mockResolve(tools), health:()=>mockResolve(healthScores), conversations:()=>mockResolve(conversations), reviews:()=>mockResolve(reviewTasks), traces:()=>mockResolve(traces), terminals:()=>mockResolve(terminals),
- simulateTool:(payload:unknown)=>mockResolve({code:0, elapsed:`${Math.floor(80+Math.random()*220)}ms`, data:{accepted:true, payload, result:'模拟调用成功，已返回政策依据与办理建议'}, logs:['构造请求参数','执行 Mock 工具','返回模拟响应']}),
- generateSkill:()=>mockResolve({说明:'光伏并网导办技能用于识别用户主体、生成材料清单、输出并网路径。',触发意图:['光伏并网咨询','办理材料查询','并网流程咨询'],关联政策:['江西省分布式光伏并网政策'],关联规则:['自然人光伏并网容量判断'],关联工具:['材料清单生成工具','容量判断工具'],回答要求:['必须引用依据','输出办理路径','高风险转人工'],风险提示:['容量边界需复核','企业项目需校验备案'],测试用例:['自然人申请光伏并网需要什么材料？','6MW 项目是否可线上办理？']})
+  dashboard: () => mockResolve(domainService.getDashboard()),
+  assets: () => mockResolve(domainService.db.assets),
+  files: () => mockResolve(domainService.db.files),
+  metadata: () => mockResolve(domainService.db.metadata),
+  versions: () => mockResolve(domainService.db.versions),
+  compileTasks: () => mockResolve(domainService.db.compileTasks),
+  markdownDocs: () => mockResolve(domainService.db.markdownDocs),
+  chunks: () => mockResolve(domainService.db.chunks),
+  policies: () => mockResolve(domainService.db.policies),
+  conflicts: () => mockResolve(domainService.db.conflicts),
+  missing: () => mockResolve(domainService.db.missingKnowledge),
+  rules: () => mockResolve(domainService.db.rules),
+  skills: () => mockResolve(domainService.db.skills),
+  tools: () => mockResolve(domainService.db.tools),
+  health: () => mockResolve(domainService.db.healthScores),
+  conversations: () => mockResolve(domainService.db.conversations),
+  reviews: () => mockResolve(domainService.db.reviewTasks),
+  traces: () => mockResolve(domainService.db.traces),
+  terminals: () => mockResolve(domainService.db.terminals),
+  assetDetail: (assetId: string) => mockResolve(domainService.getAssetDetail(assetId)),
+  skillDetail: (skillId: string) => mockResolve(domainService.getSkillDetail(skillId)),
+  traceDetail: (traceId: string) => mockResolve(domainService.getTraceDetail(traceId)),
+  submitReview: (objectType: any, objectId: string, title?: string) => mockResolve(domainService.submitReview(objectType, objectId, title)),
+  review: (reviewId: string, status: any, opinion: string) => mockResolve(domainService.review(reviewId, status, opinion)),
+  publish: (objectType: any, objectId: string) => mockResolve(domainService.publish(objectType, objectId)),
+  rollback: (versionId: string) => mockResolve(domainService.rollback(versionId)),
+  startCompile: (fileId: string) => mockResolve(domainService.startCompile(fileId)),
+  simulateTool: (payload: any) => mockResolve(domainService.simulateTool(payload.toolId, payload.params)),
+  generateSkill: (prompt = '') => mockResolve(domainService.generateSkillDraft(prompt)),
+  saveSkillDraft: (draft: any) => mockResolve(domainService.saveSkillDraft(draft)),
+  simulateBrainCall: (question: string, terminalId: string) => mockResolve(domainService.simulateBrainCall(question, terminalId)),
 };
